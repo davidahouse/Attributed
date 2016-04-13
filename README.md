@@ -1,5 +1,10 @@
 # Attributed
 
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+[![CocoaPods Compatible](https://img.shields.io/cocoapods/v/DAHAttributed.svg)](https://cocoapods.org/pods/DAHAttributed)
+[![GitHub license](https://img.shields.io/badge/license-MIT-lightgrey.svg)](./LICENSE)
+[![Build Status](https://travis-ci.org/davidahouse/DAHAttributed.svg)](https://travis-ci.org/davidahouse/DAHAttributed)
+
 Creating NSAttributedString objects can be cumbersome to do in code. This library adds a helper object that can apply attributes to strings easily.
 
 ## Installation
