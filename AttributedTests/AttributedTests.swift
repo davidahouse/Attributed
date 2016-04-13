@@ -30,7 +30,29 @@ class AttributedTests: XCTestCase {
         XCTAssertEqual(result, NSAttributedString(string: aString))
     }
     
+    func testCanCreateAnEmptyString() {
+        
+        let attributed = Attributed()
+        let result = attributed.string { "" }
+        XCTAssertEqual(result.length,0)
+        
+        let attributedResult = attributed.string { NSAttributedString() }
+        XCTAssertEqual(attributedResult.length, 0)
+    }
+    
     func testCanCreateAStringWithOnlyColorApplied() {
+        
+        let attributed = Attributed(color: NSColor.redColor())
+        let result = attributed.string(aString)
+        var range = NSRange()
+        let attributes = result.attributesAtIndex(0, effectiveRange: &range)
+        XCTAssertEqual(attributes.count, 1)
+        XCTAssertTrue(attributes.keys.contains(NSForegroundColorAttributeName))
+        XCTAssertEqual(range.location, 0)
+        XCTAssertEqual(range.length, result.length)
+    }
+    
+    func testCanCreateAStringWithOnlyColorAppliedUsingClosure() {
     
         let attributed = Attributed(color: NSColor.redColor())
         let result = attributed.string { aString }
