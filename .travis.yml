@@ -10,7 +10,5 @@ before_script:
 - set -o pipefail
 script:
 - scan -s Attributed
-- scan -s MobileAttributed
-- scan -s TVAttributed
 - carthage build --no-skip-current --configuration Debug
 - pod lib lint --quick
