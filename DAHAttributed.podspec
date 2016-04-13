@@ -3,7 +3,7 @@ Pod::Spec.new do |s|
   # ―――  Spec Metadata  ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
 
   s.name         = "DAHAttributed"
-  s.version      = "1.0.0"
+  s.version      = "1.0.1"
   s.summary      = "A Swift helper for creating NSAttributedString objects"
 
   s.description  = <<-DESC
