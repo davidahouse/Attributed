@@ -28,7 +28,7 @@ for up to date installation instructions.
 Add the following to your [Podfile](http://guides.cocoapods.org/using/the-podfile.html):
 
 ```ruby
-pod 'Attributed'
+pod 'DAHAttributed'
 ```
 
 You will also need to make sure you're opting into using frameworks:
