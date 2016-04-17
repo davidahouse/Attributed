@@ -48,7 +48,7 @@ public class Attributed {
     ///
     /// - parameter inner: A String
     /// - returns: An NSAttributedString that has the attributes applied to it
-    public func string(inner: String) -> NSAttributedString {
+    public func toString(inner: String) -> NSAttributedString {
         return NSAttributedString(string: inner, attributes: attributes)
     }
     
@@ -57,7 +57,7 @@ public class Attributed {
     ///
     /// - parameter inner: A closure that returns a String
     /// - returns: An NSAttributedString that has the attributes applied to it
-    public func string(inner:() -> String) -> NSAttributedString {
+    public func toString(inner:() -> String) -> NSAttributedString {
         return NSAttributedString(string: inner(), attributes: attributes)
     }
     
@@ -68,7 +68,7 @@ public class Attributed {
     ///
     /// - parameter inner: An NSAttributedString
     /// - returns: An NSAttributedString that has the attributes applied to it
-    public func string(inner: NSAttributedString) -> NSAttributedString {
+    public func toString(inner: NSAttributedString) -> NSAttributedString {
         let output = NSMutableAttributedString(attributedString: inner)
         guard output.length > 0 else {
             return output
@@ -95,9 +95,9 @@ public class Attributed {
     ///
     /// - parameter inner: A closure that returns an NSAttributedString
     /// - returns: An NSAttributedString that has the attributes applied to it
-    public func string(inner:() -> NSAttributedString) -> NSAttributedString {
+    public func toString(inner:() -> NSAttributedString) -> NSAttributedString {
         
-        return string(inner())
+        return toString(inner())
     }
 
     /// Create an NSAttributedString by combining multiple Strings using 
@@ -112,7 +112,7 @@ public class Attributed {
             if output.length > 0 {
                 output.appendAttributedString(NSAttributedString(string: separator))
             }
-            output.appendAttributedString(string{ inner })
+            output.appendAttributedString(toString{ inner })
         }
         return output
     }
@@ -129,7 +129,7 @@ public class Attributed {
             if output.length > 0 {
                 output.appendAttributedString(NSAttributedString(string: separator))
             }
-            output.appendAttributedString(string{ inner })
+            output.appendAttributedString(toString{ inner })
         }
         return output
     }

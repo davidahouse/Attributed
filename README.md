@@ -86,13 +86,13 @@ let detailsText = Attributed(attributes: [NSForegroundColorAttributeName: NSColo
 - Apply the formatting to a String
 
 ```swift
-let stringWithAttributes = redText.string { "Hi mom!" }
+let stringWithAttributes = redText.toString { "Hi mom!" }
 ```
 
 - Apply the formatting to a NSAttributedString
 
 ```swift
-let attributedStringWithAttributes = redText.string { NSAttributedString(string: "The quick brown fox") }
+let attributedStringWithAttributes = redText.toString { NSAttributedString(string: "The quick brown fox") }
 ```
 
 - Combining Strings
@@ -104,13 +104,13 @@ let multipleStrings = boldText.combine(strings: "Hi mom!", "The quick brown fox"
 - Nesting
 
 ```swift
-let nestedStrings = redText.string { boldText.string { "Header: " } + "here are the details" }
+let nestedStrings = redText.toString { boldText.toString { "Header: " } + "here are the details" }
 ```
 
 - More nesting
 
 ```swift
-let anotherNestedString = redText.string { boldText.string { "Header: " } + detailsText.string { "here are the details" } + blueText.string{ "@" } }
+let anotherNestedString = redText.toString { boldText.toString { "Header: " } + detailsText.toString { "here are the details" } + blueText.toString{ "@" } }
 ```
 
 - Strings and attributed strings can be added together
