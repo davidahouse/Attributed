@@ -10,14 +10,14 @@ import Attributed
 let noFormatting = Attributed()
 
 //: Apply a color
-let redText = Attributed(color: NSColor.redColor())
-let blueText = Attributed(color: NSColor.blueColor())
+let redText = Attributed(color: NSColor.red)
+let blueText = Attributed(color: NSColor.blue)
 
 //: Apply a font
-let boldText = Attributed(font: NSFont.boldSystemFontOfSize(24))
+let boldText = Attributed(font: NSFont.boldSystemFont(ofSize: 24))
 
 //: Multiple values
-let detailsText = Attributed(attributes: [NSForegroundColorAttributeName: NSColor.greenColor(), NSFontAttributeName: NSFont.systemFontOfSize(18)])
+let detailsText = Attributed(attributes: [NSForegroundColorAttributeName: NSColor.green, NSFontAttributeName: NSFont.systemFont(ofSize: 18)])
 
 //: Usage once you have an Attributed:
 

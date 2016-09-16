@@ -1,0 +1,66 @@
+opt_out_usage
+
+#######################################################################
+# Lifecycle Hooks
+#######################################################################
+
+before_all do
+  sh("cat ~/Library/Developer/CoreSimulator/Devices/device_set.plist")
+  sh("ls -R ~/Library/Developer/CoreSimulator/Devices/")
+end
+
+after_all do |lane|
+    # This block is called, only if the executed lane was successful
+end
+
+error do |lane, exception|
+end
+
+#######################################################################
+# Lanes
+#######################################################################
+
+desc "Perform the build steps on travis CI"
+lane :travis do
+  macOS
+end
+
+desc "Build Attributed for macOS"
+lane :macOS do
+  scan(scheme: "Attributed")
+end
+
+desc "Build Attributed for iOS"
+lane :iOS do
+  scan(scheme: "MobileAttributed", device: "iPhone 7 (10.0)")
+end
+
+desc "Build Attributed for tvOS"
+lane :tvOS do
+  scan(scheme: "TVAttributed")
+end
+
+desc "Validate cocoapods podspec file"
+lane :validate_cocoapods do
+  pod_lib_lint(quick: true)
+end
+
+desc "Validate carthage build"
+lane :validate_carthage do
+  if is_ci?
+    system("./Resources/scripts/validate_carthage.sh")
+  else
+    puts "This is a CI only lane, skipping"
+  end
+end
+
+desc "Create docs"
+lane :create_docs do
+  ## TODO: Implement once jazzy is working well for Xcode 8
+  if is_ci?
+    #system("./Resources/scripts/publish_docs.sh")
+    puts "Would be creating docs here"
+  else
+    puts "This is a CI only lane, skipping"
+  end
+end

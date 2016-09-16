@@ -27,3 +27,9 @@ docs/
 
 # Fastlane/Scan
 test_output/
+
+# Carthage
+Carthage/Build
+report.xml
+fastlane/test_output
+fastlane/build_output

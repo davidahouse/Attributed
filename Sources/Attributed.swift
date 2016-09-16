@@ -9,7 +9,7 @@
 import Foundation
 
 /// A helper class for creating NSAttributedString objects
-public class Attributed {
+open class Attributed {
     
     let attributes: [String: AnyObject]
     
@@ -48,7 +48,7 @@ public class Attributed {
     ///
     /// - parameter inner: A String
     /// - returns: An NSAttributedString that has the attributes applied to it
-    public func toString(inner: String) -> NSAttributedString {
+    open func toString(_ inner: String) -> NSAttributedString {
         return NSAttributedString(string: inner, attributes: attributes)
     }
     
@@ -57,7 +57,7 @@ public class Attributed {
     ///
     /// - parameter inner: A closure that returns a String
     /// - returns: An NSAttributedString that has the attributes applied to it
-    public func toString(inner:() -> String) -> NSAttributedString {
+    open func toString(_ inner:() -> String) -> NSAttributedString {
         return NSAttributedString(string: inner(), attributes: attributes)
     }
     
@@ -68,7 +68,7 @@ public class Attributed {
     ///
     /// - parameter inner: An NSAttributedString
     /// - returns: An NSAttributedString that has the attributes applied to it
-    public func toString(inner: NSAttributedString) -> NSAttributedString {
+    open func toString(_ inner: NSAttributedString) -> NSAttributedString {
         let output = NSMutableAttributedString(attributedString: inner)
         guard output.length > 0 else {
             return output
@@ -77,7 +77,7 @@ public class Attributed {
         var startIndex = 0
         while ( startIndex < output.length ) {
             var range = NSRange()
-            let attributesAt = output.attributesAtIndex(startIndex, effectiveRange: &range)
+            let attributesAt = output.attributes(at: startIndex, effectiveRange: &range)
             for attribute in attributes {
                 if !attributesAt.keys.contains(attribute.0) {
                     output.addAttribute(attribute.0, value: attribute.1, range: range)
@@ -95,7 +95,7 @@ public class Attributed {
     ///
     /// - parameter inner: A closure that returns an NSAttributedString
     /// - returns: An NSAttributedString that has the attributes applied to it
-    public func toString(inner:() -> NSAttributedString) -> NSAttributedString {
+    open func toString(_ inner:() -> NSAttributedString) -> NSAttributedString {
         
         return toString(inner())
     }
@@ -106,13 +106,13 @@ public class Attributed {
     /// - parameter separator: The separator to use between each String, with space being the default
     /// - parameter strings: A variable number of String objects that will be combined
     /// - returns: An NSAttributedString with all the Strings combined and attributes applied
-    public func combine(separator: String = " ", strings: String...) -> NSAttributedString {
+    open func combine(_ separator: String = " ", strings: String...) -> NSAttributedString {
         let output = NSMutableAttributedString()
         for inner in strings {
             if output.length > 0 {
-                output.appendAttributedString(NSAttributedString(string: separator))
+                output.append(NSAttributedString(string: separator))
             }
-            output.appendAttributedString(toString{ inner })
+            output.append(toString{ inner })
         }
         return output
     }
@@ -123,13 +123,13 @@ public class Attributed {
     /// - parameter separator: The separator to use between each String, with space being the default
     /// - parameter strings: A variable number of NSAttributedString objects that will be combined
     /// - returns: An NSAttributedString with all the NSAttributedStrings combined and attributes applied
-    public func combine(separator: String = " ", strings: NSAttributedString...) -> NSAttributedString {
+    open func combine(_ separator: String = " ", strings: NSAttributedString...) -> NSAttributedString {
         let output = NSMutableAttributedString()
         for inner in strings {
             if output.length > 0 {
-                output.appendAttributedString(NSAttributedString(string: separator))
+                output.append(NSAttributedString(string: separator))
             }
-            output.appendAttributedString(toString{ inner })
+            output.append(toString{ inner })
         }
         return output
     }
@@ -142,7 +142,7 @@ public class Attributed {
 /// - returns: An NSAttributedString representing left + right
 public func + (left:NSAttributedString, right:NSAttributedString) -> NSAttributedString {
     let output = NSMutableAttributedString(attributedString: left)
-    output.appendAttributedString(right)
+    output.append(right)
     return output
 }
 
@@ -153,7 +153,7 @@ public func + (left:NSAttributedString, right:NSAttributedString) -> NSAttribute
 /// - returns: An NSAttributedString representing left + right
 public func + (left:NSAttributedString, right:String) -> NSAttributedString {
     let output = NSMutableAttributedString(attributedString: left)
-    output.appendAttributedString(NSAttributedString(string: right))
+    output.append(NSAttributedString(string: right))
     return output
 }
 
@@ -164,6 +164,6 @@ public func + (left:NSAttributedString, right:String) -> NSAttributedString {
 /// - returns: An NSAttributedString representing left + right
 public func + (left:String, right:NSAttributedString) -> NSAttributedString {
     let output = NSMutableAttributedString(attributedString: NSAttributedString(string: left))
-    output.appendAttributedString(right)
+    output.append(right)
     return output
 }
