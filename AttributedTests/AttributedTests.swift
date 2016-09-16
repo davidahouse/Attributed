@@ -188,7 +188,11 @@ class AttributedTests: XCTestCase {
 
     func testCanCreateAnAttributedStringFromANSColor() {
 
-        let result = NSColor.red.toString(aString)
+        #if os(macOS)
+            let result = NSColor.red.toString(aString)
+        #else
+            let result = UIColor.red.toString(aString)
+        #endif
         var range = NSRange()
         let attributes = result.attributes(at: 0, effectiveRange: &range)
         XCTAssertEqual(attributes.count, 1)
