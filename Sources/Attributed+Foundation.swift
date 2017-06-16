@@ -25,7 +25,7 @@ extension NSColor {
     ///
     /// - parameter inner: A String
     /// - returns: An NSAttributedString that has the attributes applied to it
-    public func toString(inner: String) -> NSAttributedString {
+    public func toString(_ inner: String) -> NSAttributedString {
         let attributes = [NSForegroundColorAttributeName: self]
         return NSAttributedString(string: inner, attributes: attributes)
     }    
@@ -40,7 +40,7 @@ extension NSFont {
     ///
     /// - parameter inner: A String
     /// - returns: An NSAttributedString that has the attributes applied to it
-    public func toString(inner: String) -> NSAttributedString {
+    public func toString(_ inner: String) -> NSAttributedString {
         let attributes = [NSFontAttributeName: self]
         return NSAttributedString(string: inner, attributes: attributes)
     }

@@ -15,14 +15,14 @@ class AttributedTests: XCTestCase {
 
     func testCanCreateAStringWithNoFormatting() {
 
-        let attributed = Attributed()
+        let attributed = Attributed
         let result = attributed.toString { aString }
         XCTAssertEqual(result, NSAttributedString(string: aString))
     }
 
     func testCanCreateAnEmptyString() {
 
-        let attributed = Attributed()
+        let attributed = Attributed
         let result = attributed.toString { "" }
         XCTAssertEqual(result.length, 0)
 
@@ -32,10 +32,10 @@ class AttributedTests: XCTestCase {
 
     func testCanCreateAStringWithOnlyColorApplied() {
 
-        let attributed = Attributed(color: NSColor.redColor())
+        let attributed = Attributed(color: NSColor.red)
         let result = attributed.toString(aString)
         var range = NSRange()
-        let attributes = result.attributesAtIndex(0, effectiveRange: &range)
+        let attributes = result.attributes(at: 0, effectiveRange: &range)
         XCTAssertEqual(attributes.count, 1)
         XCTAssertTrue(attributes.keys.contains(NSForegroundColorAttributeName))
         XCTAssertEqual(range.location, 0)
@@ -44,10 +44,10 @@ class AttributedTests: XCTestCase {
 
     func testCanCreateAStringWithOnlyColorAppliedUsingClosure() {
 
-        let attributed = Attributed(color: NSColor.redColor())
+        let attributed = Attributed(color: NSColor.red)
         let result = attributed.toString { aString }
         var range = NSRange()
-        let attributes = result.attributesAtIndex(0, effectiveRange: &range)
+        let attributes = result.attributes(at: 0, effectiveRange: &range)
         XCTAssertEqual(attributes.count, 1)
         XCTAssertTrue(attributes.keys.contains(NSForegroundColorAttributeName))
         XCTAssertEqual(range.location, 0)
@@ -56,26 +56,26 @@ class AttributedTests: XCTestCase {
 
     func testCanCreateStringWithOnlyFontApplied() {
 
-        let attributed = Attributed(font: NSFont.boldSystemFontOfSize(24))
+        let attributed = Attributed(font: NSFont.boldSystemFont(ofSize: 24))
         let result = attributed.toString { aString }
         var range = NSRange()
-        let attributes = result.attributesAtIndex(0, effectiveRange: &range)
+        let attributes = result.attributes(at: 0, effectiveRange: &range)
         XCTAssertEqual(attributes.count, 1)
         XCTAssertTrue(attributes.keys.contains(NSFontAttributeName))
         let font = attributes[NSFontAttributeName] as? NSFont
-        XCTAssertEqual(font, NSFont.boldSystemFontOfSize(24))
+        XCTAssertEqual(font, NSFont.boldSystemFont(ofSize: 24))
         XCTAssertEqual(range.location, 0)
         XCTAssertEqual(range.length, result.length)
     }
 
     func testCanCreateStringWithMultipleAttributesAtOnce() {
 
-        let attributes = [NSForegroundColorAttributeName: NSColor.redColor(),
-                          NSFontAttributeName: NSFont.boldSystemFontOfSize(24)]
+        let attributes = [NSForegroundColorAttributeName: NSColor.red,
+                          NSFontAttributeName: NSFont.boldSystemFont(ofSize: 24)]
         let attributed = Attributed(attributes: attributes)
         let result = attributed.toString { aString }
         var range = NSRange()
-        let foundAttributes = result.attributesAtIndex(0, effectiveRange: &range)
+        let foundAttributes = result.attributes(at: 0, effectiveRange: &range)
         XCTAssertEqual(foundAttributes.count, attributes.count)
         XCTAssertEqual(foundAttributes[NSForegroundColorAttributeName] as? NSColor,
                        attributes[NSForegroundColorAttributeName] as? NSColor)
@@ -88,10 +88,10 @@ class AttributedTests: XCTestCase {
     func testThatAttributedStringCanFormatted() {
 
         let plainAttributedString = NSAttributedString(string: aString)
-        let attributed = Attributed(color: NSColor.redColor())
+        let attributed = Attributed(color: NSColor.red)
         let result = attributed.toString { plainAttributedString }
         var range = NSRange()
-        let attributes = result.attributesAtIndex(0, effectiveRange: &range)
+        let attributes = result.attributes(at: 0, effectiveRange: &range)
         XCTAssertEqual(attributes.count, 1)
         XCTAssertTrue(attributes.keys.contains(NSForegroundColorAttributeName))
         XCTAssertEqual(range.location, 0)
@@ -101,22 +101,22 @@ class AttributedTests: XCTestCase {
     func testThatApplyingAttributesDoesntOverrideExistingAttributes() {
 
         let plainAttributedString = NSAttributedString(string: aString)
-        let attributed = Attributed(color: NSColor.redColor())
+        let attributed = Attributed(color: NSColor.red)
         let result = attributed.toString { plainAttributedString }
         var range = NSRange()
-        let attributes = result.attributesAtIndex(0, effectiveRange: &range)
+        let attributes = result.attributes(at: 0, effectiveRange: &range)
         XCTAssertEqual(attributes.count, 1)
         XCTAssertTrue(attributes.keys.contains(NSForegroundColorAttributeName))
         XCTAssertEqual(range.location, 0)
         XCTAssertEqual(range.length, result.length)
 
-        let greenAttributed = Attributed(color: NSColor.greenColor())
+        let greenAttributed = Attributed(color: NSColor.green)
         let finalResult = greenAttributed.toString { result }
-        let finalAttributes = finalResult.attributesAtIndex(0, effectiveRange: &range)
+        let finalAttributes = finalResult.attributes(at: 0, effectiveRange: &range)
         XCTAssertEqual(finalAttributes.count, 1)
         XCTAssertTrue(finalAttributes.keys.contains(NSForegroundColorAttributeName))
         XCTAssertEqual(finalAttributes[NSForegroundColorAttributeName] as? NSColor,
-                       NSColor.redColor())
+                       NSColor.red)
         XCTAssertEqual(range.location, 0)
         XCTAssertEqual(range.length, result.length)
     }
@@ -140,7 +140,7 @@ class AttributedTests: XCTestCase {
 
     func testCanCombineStrings() {
 
-        let attributed = Attributed()
+        let attributed = Attributed
         let result = attributed.combine(strings: aString, aString, aString)
         XCTAssertEqual(result.length, (aString.characters.count * 3) + 2)
     }
@@ -148,23 +148,23 @@ class AttributedTests: XCTestCase {
     func testCanCominbeAttribtedStrings() {
 
         let firstString = NSAttributedString(string: aString)
-        let attributed = Attributed()
+        let attributed = Attributed
         let result = attributed.combine(strings: firstString, firstString, firstString)
         XCTAssertEqual(result.length, (firstString.length * 3) + 2)
     }
 
     func testCanCombineStringsWhileSpecifyingASeparator() {
 
-        let attributed = Attributed()
+        let attributed = Attributed
         let result = attributed.combine("", strings: aString, aString, aString)
         XCTAssertEqual(result.length, (aString.characters.count * 3))
     }
 
     func testCanCreateAnAttributedStringFromANSColor() {
 
-        let result = NSColor.redColor().toString(aString)
+        let result = NSColor.red.toString(aString)
         var range = NSRange()
-        let attributes = result.attributesAtIndex(0, effectiveRange: &range)
+        let attributes = result.attributes(at: 0, effectiveRange: &range)
         XCTAssertEqual(attributes.count, 1)
         XCTAssertTrue(attributes.keys.contains(NSForegroundColorAttributeName))
         XCTAssertEqual(range.location, 0)
@@ -173,13 +173,13 @@ class AttributedTests: XCTestCase {
 
     func testCanCreateAnAttributedStringFromANSFont() {
 
-        let result = NSFont.boldSystemFontOfSize(24).toString(aString)
+        let result = NSFont.boldSystemFont(ofSize: 24).toString(aString)
         var range = NSRange()
-        let attributes = result.attributesAtIndex(0, effectiveRange: &range)
+        let attributes = result.attributes(at: 0, effectiveRange: &range)
         XCTAssertEqual(attributes.count, 1)
         XCTAssertTrue(attributes.keys.contains(NSFontAttributeName))
         let font = attributes[NSFontAttributeName] as? NSFont
-        XCTAssertEqual(font, NSFont.boldSystemFontOfSize(24))
+        XCTAssertEqual(font, NSFont.boldSystemFont(ofSize: 24))
         XCTAssertEqual(range.location, 0)
         XCTAssertEqual(range.length, result.length)
     }
